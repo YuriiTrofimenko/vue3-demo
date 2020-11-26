@@ -1,6 +1,11 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <h2>{{ innerCount }}</h2>
+    <div>
+      <button v-on:click="increase">+1</button>
+      <button v-on:click="decrease">-1</button>
+    </div>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -38,11 +43,28 @@ import { Options, Vue } from 'vue-class-component'
 
 @Options({
   props: {
-    msg: String
+    msg: String,
+    count: Number
   }
 })
 export default class HelloWorld extends Vue {
   msg!: string
+  count = 0
+  get innerCount () {
+    return this.count
+  }
+
+  set innerCount (value) {
+    this.count = value
+  }
+
+  increase () {
+    this.innerCount = this.innerCount + 1
+  }
+
+  decrease () {
+    this.innerCount = this.innerCount - 1
+  }
 }
 </script>
 
